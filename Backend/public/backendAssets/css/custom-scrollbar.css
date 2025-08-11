@@ -1,0 +1,88 @@
+/* Custom Scrollbar Styling for Dashtreme Admin Theme */
+
+/* WebKit browsers (Chrome, Safari, Opera) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7934f3;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6a27e0;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #7934f3 rgba(0, 0, 0, 0.1);
+}
+
+/* SimpleBar custom styling */
+.simplebar-scrollbar:before {
+    position: absolute;
+    content: "";
+    background: #7934f3 !important;
+    border-radius: 7px;
+    left: 0;
+    right: 0;
+    opacity: 0.7 !important;
+    transition: opacity 0.2s linear;
+}
+
+.simplebar-track:hover .simplebar-scrollbar:before,
+.simplebar-track .simplebar-scrollbar.visible:before {
+    opacity: 0.9 !important;
+}
+
+/* For different theme compatibility */
+.bg-theme1 .simplebar-scrollbar:before,
+.bg-theme2 .simplebar-scrollbar:before,
+.bg-theme3 .simplebar-scrollbar:before,
+.bg-theme4 .simplebar-scrollbar:before,
+.bg-theme5 .simplebar-scrollbar:before,
+.bg-theme6 .simplebar-scrollbar:before,
+.bg-theme7 .simplebar-scrollbar:before,
+.bg-theme8 .simplebar-scrollbar:before,
+.bg-theme9 .simplebar-scrollbar:before,
+.bg-theme10 .simplebar-scrollbar:before,
+.bg-theme11 .simplebar-scrollbar:before,
+.bg-theme12 .simplebar-scrollbar:before,
+.bg-theme13 .simplebar-scrollbar:before,
+.bg-theme14 .simplebar-scrollbar:before,
+.bg-theme15 .simplebar-scrollbar:before {
+    background: #7934f3 !important;
+}
+
+/* Ensure scrollbar is visible on hover */
+.simplebar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+.simplebar-track.vertical {
+    width: 10px;
+}
+
+.simplebar-track.horizontal {
+    height: 10px;
+}
+
+/* Custom styling for sidebar scrollbar */
+#sidebar-wrapper .simplebar-scrollbar:before {
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Custom styling for content area scrollbars */
+.content-wrapper .simplebar-scrollbar:before {
+    background: #7934f3 !important;
+}
