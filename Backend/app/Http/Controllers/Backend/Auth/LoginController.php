@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Backend\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -46,5 +50,36 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view('backend.auth.login');
+    }
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $credentials = $request->only('email', 'password');
+
+            if (Auth::attempt($credentials)) {
+                if (Auth::user()->role == "admin") {
+
+                    return redirect()->intended('dashboard');
+                } else {
+                    Auth::logout();
+                    return back()->withErrors([
+                        'email' => 'You are not Admin',
+                    ]);
+                }
+            }
+            return back()->withErrors([
+            'password' => 'Invalid Password',
+        ]);
+        }
+
+        return back()->withErrors([
+            'email' => 'Cannot find Account with this Email',
+        ]);
     }
 }

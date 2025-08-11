@@ -105,10 +105,10 @@
                     </form>
                 </div>
             </div>
-            <div class="card-footer text-center py-3">
+            {{-- <div class="card-footer text-center py-3">
                 <p class="text-warning mb-0">Do not have an account? <a href="{{ route('register') }}"> Sign Up here</a>
                 </p>
-            </div>
+            </div> --}}
         </div>
 
         <!--Start Back To Top Button-->
@@ -169,14 +169,14 @@
         function changeTheme(themeClass) {
             // Apply theme
             document.body.className = 'bg-theme ' + themeClass;
-            
+
             // Save to localStorage
             localStorage.setItem('dashtremeTheme', themeClass);
-            
+
             // Close sidebar
             document.querySelector('.right-sidebar').classList.remove('right-toggled');
         }
-        
+
         // Toggle theme switcher sidebar
         document.addEventListener('DOMContentLoaded', function() {
             var switcherIcon = document.querySelector('.switcher-icon');
