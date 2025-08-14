@@ -15,8 +15,13 @@ class Profile extends Model
         'state',
         'country',
         'zip',
-        'phone',
+        'alternative_phone',
         'date_of_birth',
         'gender',
+        'user_id',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

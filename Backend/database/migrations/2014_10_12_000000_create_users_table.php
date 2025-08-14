@@ -23,7 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('role')->default('user');
             $table->string('profile_picture')->nullable();
-            $table->integer('profile_id')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('status')->default('active');
             $table->rememberToken();
             $table->timestamps();
         });

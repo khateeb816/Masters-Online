@@ -1,12 +1,9 @@
 <?php
 
-use App\Http\Controllers\Backend\Auth\LoginController;
-use App\Http\Controllers\Backend\Auth\RegisterController;
-use App\Http\Controllers\Backend\Auth\ForgotPasswordController;
-use App\Http\Controllers\Backend\Auth\ResetPasswordController;
-use App\Http\Controllers\Backend\Auth\ConfirmPasswordController;
-use App\Http\Controllers\Backend\Auth\VerificationController;
-use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,28 +22,30 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-// Password Reset Routes
-Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+// Registration Routes
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
 
-// Password Confirmation Routes
-Route::get('password/confirm', [ConfirmPasswordController::class, 'showConfirmForm'])->name('password.confirm');
-Route::post('password/confirm', [ConfirmPasswordController::class, 'confirm']);
-
-// Email Verification Routes
-Route::get('email/verify', [VerificationController::class, 'show'])->name('verification.notice');
-Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
-Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
 // Dashboard Routes
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::group(['middleware' => 'auth'], function () {
 
-// Theme Pages Routes
-Route::get('/icons', [DashboardController::class, 'icons'])->name('icons');
-Route::get('/forms', [DashboardController::class, 'forms'])->name('forms');
-Route::get('/tables', [DashboardController::class, 'tables'])->name('tables');
-Route::get('/calendar', [DashboardController::class, 'calendar'])->name('calendar');
-Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+    // Dashboard Routes
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // User Routes
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::get('/users/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
+
+    // Theme Pages Routes
+    Route::get('/icons', [DashboardController::class, 'icons'])->name('icons');
+    Route::get('/forms', [DashboardController::class, 'forms'])->name('forms');
+    Route::get('/tables', [DashboardController::class, 'tables'])->name('tables');
+    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+});

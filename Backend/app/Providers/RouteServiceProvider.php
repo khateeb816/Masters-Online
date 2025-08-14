@@ -46,10 +46,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
 
-        // Update the auth controller namespace
-        Route::middleware('web')
-            ->namespace('App\Http\Controllers\Backend\Auth')
-            ->group(base_path('routes/auth.php'));
+
     }
 
     /**
