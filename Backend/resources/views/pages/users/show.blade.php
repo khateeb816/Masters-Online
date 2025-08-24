@@ -6,19 +6,20 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4 class="card-title mb-0">User Details</h4>
+                        <h4 class="card-title mb-0">
+                            <i class="zmdi zmdi-account-circle mr-2"></i>User Details
+                        </h4>
                         <div>
-                            <a href="{{ route('users.delete', $user->id) }}" class="btn btn-danger btn-sm"
+                            <a href="{{ route('users.delete', $user->id) }}" class="btn btn-outline-danger btn-sm"
                                 onclick="return confirm('Are you sure you want to delete this user?')">
                                 <i class="zmdi zmdi-delete"></i> Delete
                             </a>
-                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">
+                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-warning btn-sm">
                                 <i class="zmdi zmdi-edit"></i> Edit
                             </a>
-                            <a href="{{ route('users') }}" class="btn btn-secondary btn-sm">
+                            <a href="{{ route('users') }}" class="btn btn-outline-secondary btn-sm">
                                 <i class="zmdi zmdi-arrow-left"></i> Back to Users
                             </a>
-
                         </div>
                     </div>
                     <div class="card-body">
@@ -69,16 +70,23 @@
                                         @endif
                                     </div>
                                 </div>
-                                <h3>{{ $user->first_name }} {{ $user->last_name }}</h3>
-                                <p class="text-muted">{{ ucfirst($user->role) }}</p>
-                                <span class="badge badge-{{ $user->status == 'active' ? 'success' : 'danger' }}">
-                                    {{ ucfirst($user->status) }}
-                                </span>
+                                <h3 class="text-primary">{{ $user->first_name }} {{ $user->last_name }}</h3>
+                                <p class="text-dark">@/{{ $user->username }}</p>
+                                <div class="mb-3">
+                                    <span class="badge badge-{{ $user->role === 'admin' ? 'danger' : 'secondary' }} badge-pill mr-2">
+                                        <i class="zmdi zmdi-{{ $user->role === 'admin' ? 'shield-security' : 'account' }} mr-1"></i>
+                                        {{ ucfirst($user->role) }}
+                                    </span>
+                                    <span class="badge badge-{{ $user->status == 'active' ? 'success' : 'warning' }} badge-pill">
+                                        <i class="zmdi zmdi-{{ $user->status == 'active' ? 'check-circle' : 'time' }} mr-1"></i>
+                                        {{ ucfirst($user->status) }}
+                                    </span>
+                                </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h5 class="text-primary">
+                                        <h5 class="text-primary mb-3">
                                             <i class="zmdi zmdi-account-box mr-2"></i>Personal Information
                                         </h5>
                                         <table class="table table-borderless">
@@ -136,7 +144,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="col-md-12">
                                 <div class="col-md-12">
                                     @if ($user->profile_id)
                                         @php
@@ -220,10 +228,71 @@
                                     @endif
                                 </div>
 
+                                <!-- User Activity Section -->
+                                <div class="col-12 mt-4">
+                                    <div class="col-md-12">
+                                        <div class="card border-0 shadow-sm">
+                                            <div class="card-header bg-light">
+                                                <h5 class="text-dark mb-0">
+                                                    <i class="zmdi zmdi-activity mr-2"></i>User Activity & Statistics
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-3 mb-3">
+                                                        <div class="card border-0 bg-gradient-primary text-white text-center h-100 shadow-sm">
+                                                            <div class="card-body d-flex flex-column justify-content-center p-3">
+                                                                <div class="mb-3">
+                                                                    <i class="zmdi zmdi-shopping-cart" style="font-size: 2.5rem;"></i>
+                                                                </div>
+                                                                <h4 class="mb-2 font-weight-bold">{{ $user->orders->count() ?? 0 }}</h4>
+                                                                <p class="mb-0 opacity-75">Total Orders</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <div class="card border-0 bg-gradient-success text-white text-center h-100 shadow-sm">
+                                                            <div class="card-body d-flex flex-column justify-content-center p-3">
+                                                                <div class="mb-3">
+                                                                    <i class="zmdi zmdi-favorite" style="font-size: 2.5rem;"></i>
+                                                                </div>
+                                                                <h4 class="mb-2 font-weight-bold">{{ $user->wishListItems->count() ?? 0 }}</h4>
+                                                                <p class="mb-0 opacity-75">Wishlist Items</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <div class="card border-0 bg-gradient-info text-white text-center h-100 shadow-sm">
+                                                            <div class="card-body d-flex flex-column justify-content-center p-3">
+                                                                <div class="mb-3">
+                                                                    <i class="zmdi zmdi-star" style="font-size: 2.5rem;"></i>
+                                                                </div>
+                                                                <h4 class="mb-2 font-weight-bold">{{ $user->reviews->count() ?? 0 }}</h4>
+                                                                <p class="mb-0 opacity-75">Reviews Given</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <div class="card border-0 bg-gradient-warning text-white text-center h-100 shadow-sm">
+                                                            <div class="card-body d-flex flex-column justify-content-center p-3">
+                                                                <div class="mb-3">
+                                                                    <i class="zmdi zmdi-calendar" style="font-size: 2.5rem;"></i>
+                                                                </div>
+                                                                <h4 class="mb-2 font-weight-bold">{{ $user->created_at->diffForHumans() }}</h4>
+                                                                <p class="mb-0 opacity-75">Member Since</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

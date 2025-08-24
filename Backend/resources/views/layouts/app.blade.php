@@ -167,7 +167,7 @@
                                     <div class="media-body">
                                         <h6 class="mt-2 user-title">John Doe</h6>
                                         <p class="user-subtitle">Lorem ipsum dolor sit amet...</p>
-                                        <small class="text-muted">3 hours ago</small>
+                                        <small class="text-dark">3 hours ago</small>
                                     </div>
                                 </div>
                             </li>
@@ -181,7 +181,7 @@
                                     <div class="media-body">
                                         <h6 class="mt-2 user-title">Jane Smith</h6>
                                         <p class="user-subtitle">New project update available...</p>
-                                        <small class="text-muted">5 hours ago</small>
+                                        <small class="text-dark">5 hours ago</small>
                                     </div>
                                 </div>
                             </li>
@@ -200,7 +200,7 @@
                                     <div class="media-body">
                                         <h6 class="mt-2 user-title">New User Registration</h6>
                                         <p class="user-subtitle">A new user has registered</p>
-                                        <small class="text-muted">2 hours ago</small>
+                                        <small class="text-dark">2 hours ago</small>
                                     </div>
                                 </div>
                             </li>
@@ -211,7 +211,7 @@
                                     <div class="media-body">
                                         <h6 class="mt-2 user-title">Download Complete</h6>
                                         <p class="user-subtitle">Your file has been downloaded</p>
-                                        <small class="text-muted">1 hour ago</small>
+                                        <small class="text-dark">1 hour ago</small>
                                     </div>
                                 </div>
                             </li>
@@ -223,7 +223,7 @@
                                     <div class="media-body">
                                         <h6 class="mt-2 user-title">System Alert</h6>
                                         <p class="user-subtitle">Server maintenance scheduled</p>
-                                        <small class="text-muted">30 minutes ago</small>
+                                        <small class="text-dark">30 minutes ago</small>
                                     </div>
                                 </div>
                             </li>

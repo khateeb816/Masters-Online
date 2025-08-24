@@ -18,7 +18,7 @@
                     @error('code')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    <small class="form-text text-muted">Enter a unique code for the promotion (max 50 characters)</small>
+                    <small class="form-text text-dark">Enter a unique code for the promotion (max 50 characters)</small>
                 </div>
 
                 <div class="form-group">
@@ -29,7 +29,7 @@
                     @error('description')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    <small class="form-text text-muted">Optional description explaining the promotion</small>
+                    <small class="form-text text-dark">Optional description explaining the promotion</small>
                 </div>
 
                 <div class="form-group">
@@ -46,7 +46,7 @@
                     @error('discount_percentage')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    <small class="form-text text-muted">Discount percentage from 1% to 100%</small>
+                    <small class="form-text text-dark">Discount percentage from 1% to 100%</small>
                 </div>
 
                 <div class="row">
@@ -58,7 +58,7 @@
                             @error('start_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <small class="form-text text-muted">When the promo code becomes active</small>
+                            <small class="form-text text-dark">When the promo code becomes active</small>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -69,7 +69,7 @@
                             @error('end_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <small class="form-text text-muted">When the promo code expires</small>
+                            <small class="form-text text-dark">When the promo code expires</small>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                     @error('status')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    <small class="form-text text-muted">Set whether the promo code is currently active</small>
+                    <small class="form-text text-dark">Set whether the promo code is currently active</small>
                 </div>
 
                 <div class="form-group">

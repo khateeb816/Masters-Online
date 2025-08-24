@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label for="input-images">Images</label>
                         <input type="file" class="form-control" id="input-images" name="images[]" multiple>
-                        <small class="form-text text-muted">You can upload multiple images.</small>
+                        <small class="form-text text-dark">You can upload multiple images.</small>
                     </div>
 
                     <div class="form-group mt-3">

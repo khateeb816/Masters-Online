@@ -7,19 +7,21 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0">Promo Code Details</h4>
-                    <div>
-                        <a href="{{ route('promo-codes.edit', $promoCode->id) }}" class="btn btn-warning btn-sm">
-                            <i class="zmdi zmdi-edit"></i> Edit
-                        </a>
-                        <a href="{{ route('promo-codes.delete', $promoCode->id) }}" class="btn btn-danger btn-sm"
-                           onclick="return confirm('Are you sure you want to delete this promo code?')">
-                            <i class="zmdi zmdi-delete"></i> Delete
-                        </a>
-                        <a href="{{ route('promo-codes') }}" class="btn btn-secondary btn-sm">
-                            <i class="zmdi zmdi-arrow-left"></i> Back to Promo Codes
-                        </a>
-                    </div>
+                                            <h4 class="card-title mb-0">
+                            <i class="zmdi zmdi-ticket-star mr-2"></i>Promo Code Details
+                        </h4>
+                        <div>
+                            <a href="{{ route('promo-codes.edit', $promoCode->id) }}" class="btn btn-outline-warning btn-sm">
+                                <i class="zmdi zmdi-edit"></i> Edit
+                            </a>
+                            <a href="{{ route('promo-codes.delete', $promoCode->id) }}" class="btn btn-outline-danger btn-sm"
+                               onclick="return confirm('Are you sure you want to delete this promo code?')">
+                                <i class="zmdi zmdi-delete"></i> Delete
+                            </a>
+                            <a href="{{ route('promo-codes') }}" class="btn btn-outline-secondary btn-sm">
+                                <i class="zmdi zmdi-arrow-left"></i> Back to Promo Codes
+                            </a>
+                        </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -41,7 +43,7 @@
                             </div>
 
                             <h3 class="text-primary">{{ $promoCode->code }}</h3>
-                            <p class="text-muted">{{ $promoCode->description ?? 'No description available' }}</p>
+                            <p class="text-dark">{{ $promoCode->description ?? 'No description available' }}</p>
                         </div>
 
                         <div class="col-md-8">
@@ -104,7 +106,7 @@
                                                     <i class="zmdi zmdi-calendar text-primary mb-3" style="font-size: 2.5rem;"></i>
                                                     <h6 class="mb-2">Start Date</h6>
                                                     <p class="mb-1">{{ $promoCode->start_date->format('M d, Y') }}</p>
-                                                    <small class="text-muted">{{ $promoCode->start_date->diffForHumans() }}</small>
+                                                    <small class="text-dark">{{ $promoCode->start_date->diffForHumans() }}</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,7 +116,7 @@
                                                     <i class="zmdi zmdi-time text-warning mb-3" style="font-size: 2.5rem;"></i>
                                                     <h6 class="mb-2">End Date</h6>
                                                     <p class="mb-1">{{ $promoCode->end_date->format('M d, Y') }}</p>
-                                                    <small class="text-muted">{{ $promoCode->end_date->diffForHumans() }}</small>
+                                                    <small class="text-dark">{{ $promoCode->end_date->diffForHumans() }}</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +126,7 @@
                                                     <i class="zmdi zmdi-shopping-cart text-info mb-3" style="font-size: 2.5rem;"></i>
                                                     <h6 class="mb-2">Usage Count</h6>
                                                     <p class="mb-1">{{ $promoCode->orders->count() }}</p>
-                                                    <small class="text-muted">orders used this code</small>
+                                                    <small class="text-dark">orders used this code</small>
                                                 </div>
                                             </div>
                                         </div>

@@ -6,17 +6,19 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4 class="card-title mb-0">Inventory Details</h4>
+                        <h4 class="card-title mb-0">
+                            <i class="zmdi zmdi-inbox mr-2"></i>Product Details
+                        </h4>
                         <div>
-                            <a href="{{ route('inventories.delete', $inventory->id) }}" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Are you sure you want to delete this inventory?')">
+                            <a href="{{ route('inventories.delete', $inventory->id) }}" class="btn btn-outline-danger btn-sm"
+                                onclick="return confirm('Are you sure you want to delete this product?')">
                                 <i class="zmdi zmdi-delete"></i> Delete
                             </a>
-                            <a href="{{ route('inventories.edit', $inventory->id) }}" class="btn btn-warning btn-sm">
+                            <a href="{{ route('inventories.edit', $inventory->id) }}" class="btn btn-outline-warning btn-sm">
                                 <i class="zmdi zmdi-edit"></i> Edit
                             </a>
-                            <a href="{{ route('inventories') }}" class="btn btn-secondary btn-sm">
-                                <i class="zmdi zmdi-arrow-left"></i> Back to Inventories
+                            <a href="{{ route('inventories') }}" class="btn btn-outline-secondary btn-sm">
+                                <i class="zmdi zmdi-arrow-left"></i> Back to Products
                             </a>
                         </div>
                     </div>
@@ -79,7 +81,7 @@
                                 </div>
 
                                 <h3>{{ $inventory->name ?? 'Inventory Item' }}</h3>
-                                <p class="text-muted">{{ $inventory->description ?? 'No description available' }}</p>
+                                <p class="text-dark">{{ $inventory->description ?? 'No description available' }}</p>
                             </div>
 
                             <div class="col-md-8">
@@ -196,7 +198,7 @@
                                                     </div>
                                                     <div>
                                                         <h6 class="mb-1 font-weight-bold">{{ $review->user->first_name }} {{ $review->user->last_name }}</h6>
-                                                        <small class="text-muted">{{ $review->created_at->format('M d, Y') }}</small>
+                                                        <small class="text-dark">{{ $review->created_at->format('M d, Y') }}</small>
                                                     </div>
                                                 </div>
                                                 <div>
@@ -212,7 +214,7 @@
                                                 <span class="badge badge-{{ $review->status == 'active' ? 'success' : 'secondary' }} badge-pill">
                                                     {{ ucfirst($review->status) }}
                                                 </span>
-                                                <small class="text-muted">Review #{{ $review->id }}</small>
+                                                <small class="text-dark">Review #{{ $review->id }}</small>
                                             </div>
                                         </div>
                                     </div>
@@ -221,9 +223,9 @@
                             </div>
                         @else
                             <div class="text-center py-5">
-                                <i class="zmdi zmdi-star-outline text-muted" style="font-size: 4rem;"></i>
-                                <h5 class="text-muted mt-3">No Reviews Yet</h5>
-                                <p class="text-muted mb-0">This product hasn't received any reviews yet.</p>
+                                <i class="zmdi zmdi-star-outline text-dark" style="font-size: 4rem;"></i>
+                                <h5 class="text-dark mt-3">No Reviews Yet</h5>
+                                <p class="text-dark mb-0">This product hasn't received any reviews yet.</p>
                             </div>
                         @endif
                     </div>

@@ -94,7 +94,7 @@
                     <div class="form-group">
                         <label for="input-8">Images</label>
                         <input type="file" class="form-control" id="input-8" name="images[]" multiple accept="image/*">
-                        <small class="form-text text-muted">You can select multiple images. Leave empty to keep current images.</small>
+                        <small class="form-text text-dark">You can select multiple images. Leave empty to keep current images.</small>
                     </div>
 
                     <div class="form-group">

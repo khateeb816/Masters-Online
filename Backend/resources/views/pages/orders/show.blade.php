@@ -6,9 +6,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4 class="card-title mb-0">Order Details</h4>
+                        <h4 class="card-title mb-0">
+                            <i class="zmdi zmdi-shopping-cart mr-2"></i>Order Details
+                        </h4>
                         <div>
-                            <a href="{{ route('orders') }}" class="btn btn-secondary btn-sm">
+                            <a href="{{ route('orders') }}" class="btn btn-outline-secondary btn-sm">
                                 <i class="zmdi zmdi-arrow-left"></i> Back to Orders
                             </a>
                         </div>
@@ -134,7 +136,7 @@
                                                         @endif
                                                         <div>
                                                             <strong>{{ $detail->inventory->name }}</strong><br>
-                                                            <small class="text-muted">{{ $detail->inventory->category->title ?? 'N/A' }}</small>
+                                                            <small class="text-dark">{{ $detail->inventory->category->title ?? 'N/A' }}</small>
                                                         </div>
                                                     </div>
                                                 </td>
