@@ -11,6 +11,12 @@ class Category extends Model
     protected $fillable =[
         'title',
         'description',
-        'image'
+        'image',
+        'status'
     ];
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }

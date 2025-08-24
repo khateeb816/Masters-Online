@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>@yield('title', 'Dashtreme Admin - Laravel Dashboard')</title>
+    <title>@yield('title', 'Admin Dashboard - ' . config('app.name'))</title>
     <!-- loader-->
     <link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('assets/js/pace.min.js') }}"></script>
@@ -40,7 +40,7 @@
             <div class="brand-logo">
                 <a href="{{ route('dashboard') }}">
                     <img src="{{ asset('assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
-                    <h5 class="logo-text">Dashtreme Admin</h5>
+                    <h5 class="logo-text">{{ config('app.name') }}</h5>
                 </a>
             </div>
             <ul class="sidebar-menu do-nicescrol">
@@ -54,6 +54,35 @@
                 <li class="{{ request()->routeIs('users') ? 'active' : '' }}">
                     <a href="{{ route('users') }}">
                         <i class="zmdi zmdi-account-circle"></i> <span>Users</span>
+                    </a>
+                </li>
+
+                <li class="{{ request()->routeIs('orders') ? 'active' : '' }}">
+                    <a href="{{ route('orders') }}">
+                        <i class="zmdi zmdi-shopping-cart"></i> <span>Orders</span>
+                    </a>
+                </li>
+
+                <li class="{{ request()->routeIs('categories') ? 'active' : '' }}">
+                    <a href="{{ route('categories') }}">
+                        <i class="zmdi zmdi-label"></i> <span>Categories</span>
+                    </a>
+                </li>
+
+                <li class="{{ request()->routeIs('brands') ? 'active' : '' }}">
+                    <a href="{{ route('brands') }}">
+                        <i class="zmdi zmdi-store"></i> <span>Brands</span>
+                    </a>
+                </li>
+
+                <li class="{{ request()->routeIs('inventories') ? 'active' : '' }}">
+                    <a href="{{ route('inventories') }}">
+                        <i class="zmdi zmdi-inbox"></i> <span>Inventories</span>
+                    </a>
+                </li>
+                <li class="{{ request()->routeIs('promo-codes') ? 'active' : '' }}">
+                    <a href="{{ route('promo-codes') }}">
+                        <i class="zmdi zmdi-ticket-star"></i> <span>Promo Codes</span>
                     </a>
                 </li>
 
@@ -488,7 +517,7 @@
         <footer class="footer">
             <div class="container">
                 <div class="text-center">
-                    Copyright © {{ date('Y') }} Dashtreme Admin
+                    Copyright © {{ date('Y') }} {{ config('app.name') }}
                 </div>
             </div>
         </footer>

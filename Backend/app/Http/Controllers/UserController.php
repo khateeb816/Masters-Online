@@ -65,7 +65,7 @@ class UserController extends Controller
         ]);
         if ($request->hasFile('profile_picture')) {
             $image = $request->file('profile_picture');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imageName = 'user_' . time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads'), $imageName);
         }
 
@@ -143,7 +143,7 @@ class UserController extends Controller
         // Handle profile picture upload
         if ($request->hasFile('profile_picture')) {
             $image = $request->file('profile_picture');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imageName = 'user_' . time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads'), $imageName);
             $userData['profile_picture'] = $imageName;
         }
@@ -202,6 +202,9 @@ class UserController extends Controller
     public function delete($id)
     {
         $user = User::with('profile')->find($id);
+        if ($user->profile_picture) {
+            unlink(public_path('uploads/' . $user->profile_picture));
+        }
         $user->delete();
         return redirect()->route('users')->with('success', 'User deleted successfully');
     }

@@ -15,4 +15,18 @@ class Review extends Model
         'comment',
         'status',
     ];
+
+    protected $casts = [
+        'rating' => 'double',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function inventory()
+    {
+        return $this->belongsTo(Inventory::class);
+    }
 }

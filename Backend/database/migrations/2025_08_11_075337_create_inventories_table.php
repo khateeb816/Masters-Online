@@ -22,8 +22,8 @@ class CreateInventoriesTable extends Migration
             $table->integer('price');
             $table->integer('discounted_price')->nullable();
             $table->integer('stock_quantity');
-            $table->string('status');
-            $table->json('images');
+            $table->string('status')->default('active');
+            $table->string('images')->nullable();
 
             $table->timestamps();
         });
