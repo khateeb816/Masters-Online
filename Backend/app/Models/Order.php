@@ -23,6 +23,7 @@ class Order extends Model
         'sub_total',
         'total',
         'shipping_cost',
+        'rejection_reason',
     ];
 
     protected $casts = [
@@ -70,8 +71,10 @@ class Order extends Model
         return match($this->status) {
             'pending' => 'badge-warning',
             'processing' => 'badge-info',
+            'approved' => 'badge-success',
             'shipped' => 'badge-primary',
             'delivered' => 'badge-success',
+            'rejected' => 'badge-danger',
             'cancelled' => 'badge-danger',
             default => 'badge-secondary'
         };

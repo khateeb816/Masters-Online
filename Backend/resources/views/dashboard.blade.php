@@ -117,32 +117,47 @@
                     <canvas id="chart2" class="w-100"></canvas>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="table align-items-center table-sm">
-                    <tbody>
-                        <tr>
-                            <td><i class="zmdi zmdi-circle text-success mr-2"></i> Delivered</td>
-                            <td>{{ $deliveredOrders ?? 0 }}</td>
-                            <td>{{ $deliveredPercentage ?? 0 }}%</td>
-                        </tr>
-                        <tr>
-                            <td><i class="zmdi zmdi-circle text-warning mr-2"></i> Processing</td>
-                            <td>{{ $processingOrders ?? 0 }}</td>
-                            <td>{{ $processingPercentage ?? 0 }}%</td>
-                        </tr>
-                        <tr>
-                            <td><i class="zmdi zmdi-circle text-info mr-2"></i> Shipped</td>
-                            <td>{{ $shippedOrders ?? 0 }}</td>
-                            <td>{{ $shippedPercentage ?? 0 }}%</td>
-                        </tr>
-                        <tr>
-                            <td><i class="zmdi zmdi-circle text-danger mr-2"></i> Cancelled</td>
-                            <td>{{ $cancelledOrders ?? 0 }}</td>
-                            <td>{{ $cancelledPercentage ?? 0 }}%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                            <div class="table-responsive">
+                    <table class="table align-items-center table-sm">
+                        <tbody>
+                            <tr>
+                                <td><i class="zmdi zmdi-circle text-warning mr-2"></i> Pending</td>
+                                <td>{{ $pendingOrders ?? 0 }}</td>
+                                <td>{{ $pendingPercentage ?? 0 }}%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="zmdi zmdi-circle text-info mr-2"></i> Processing</td>
+                                <td>{{ $processingOrders ?? 0 }}</td>
+                                <td>{{ $processingPercentage ?? 0 }}%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="zmdi zmdi-circle text-success mr-2"></i> Approved</td>
+                                <td>{{ $approvedOrders ?? 0 }}</td>
+                                <td>{{ $approvedPercentage ?? 0 }}%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="zmdi zmdi-circle text-primary mr-2"></i> Shipped</td>
+                                <td>{{ $shippedOrders ?? 0 }}</td>
+                                <td>{{ $shippedPercentage ?? 0 }}%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="zmdi zmdi-circle text-success mr-2"></i> Delivered</td>
+                                <td>{{ $deliveredOrders ?? 0 }}</td>
+                                <td>{{ $deliveredPercentage ?? 0 }}%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="zmdi zmdi-circle text-danger mr-2"></i> Rejected</td>
+                                <td>{{ $rejectedOrders ?? 0 }}</td>
+                                <td>{{ $rejectedPercentage ?? 0 }}%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="zmdi zmdi-circle text-danger mr-2"></i> Cancelled</td>
+                                <td>{{ $cancelledOrders ?? 0 }}</td>
+                                <td>{{ $cancelledPercentage ?? 0 }}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </div>

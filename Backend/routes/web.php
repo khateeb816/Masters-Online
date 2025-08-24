@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
     // Order Routes
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::post('/orders/{order}/approve', [OrderController::class, 'approve'])->name('orders.approve');
+    Route::post('/orders/{order}/reject', [OrderController::class, 'reject'])->name('orders.reject');
 
 
     // Promo Code Routes

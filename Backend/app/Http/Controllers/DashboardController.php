@@ -22,16 +22,22 @@ class DashboardController extends Controller
         $totalRevenue = Order::sum('total');
 
         // Get order status counts
-        $deliveredOrders = Order::where('status', 'delivered')->count();
+        $pendingOrders = Order::where('status', 'pending')->count();
         $processingOrders = Order::where('status', 'processing')->count();
+        $approvedOrders = Order::where('status', 'approved')->count();
         $shippedOrders = Order::where('status', 'shipped')->count();
+        $deliveredOrders = Order::where('status', 'delivered')->count();
+        $rejectedOrders = Order::where('status', 'rejected')->count();
         $cancelledOrders = Order::where('status', 'cancelled')->count();
 
         // Calculate percentages
         $totalOrderCount = $totalOrders > 0 ? $totalOrders : 1;
-        $deliveredPercentage = round(($deliveredOrders / $totalOrderCount) * 100);
+        $pendingPercentage = round(($pendingOrders / $totalOrderCount) * 100);
         $processingPercentage = round(($processingOrders / $totalOrderCount) * 100);
+        $approvedPercentage = round(($approvedOrders / $totalOrderCount) * 100);
         $shippedPercentage = round(($shippedOrders / $totalOrderCount) * 100);
+        $deliveredPercentage = round(($deliveredOrders / $totalOrderCount) * 100);
+        $rejectedPercentage = round(($rejectedOrders / $totalOrderCount) * 100);
         $cancelledPercentage = round(($cancelledOrders / $totalOrderCount) * 100);
 
         // Get monthly data for charts
@@ -66,13 +72,19 @@ class DashboardController extends Controller
             'totalUsers',
             'totalProducts',
             'totalRevenue',
-            'deliveredOrders',
+            'pendingOrders',
             'processingOrders',
+            'approvedOrders',
             'shippedOrders',
+            'deliveredOrders',
+            'rejectedOrders',
             'cancelledOrders',
-            'deliveredPercentage',
+            'pendingPercentage',
             'processingPercentage',
+            'approvedPercentage',
             'shippedPercentage',
+            'deliveredPercentage',
+            'rejectedPercentage',
             'cancelledPercentage',
             'monthlyOrders',
             'monthlyRevenue',

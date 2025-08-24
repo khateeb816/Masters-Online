@@ -28,8 +28,8 @@
                         <div class="card border-0 bg-success text-white">
                             <div class="card-body text-center">
                                 <i class="zmdi zmdi-check-circle mb-2" style="font-size: 2rem;"></i>
-                                <h5 class="mb-1">{{ $orders->where('status', 'delivered')->count() }}</h5>
-                                <small>Delivered</small>
+                                <h5 class="mb-1">{{ $orders->whereIn('status', ['delivered', 'approved'])->count() }}</h5>
+                                <small>Completed</small>
                             </div>
                         </div>
                     </div>
@@ -37,8 +37,17 @@
                         <div class="card border-0 bg-warning text-white">
                             <div class="card-body text-center">
                                 <i class="zmdi zmdi-time mb-2" style="font-size: 2rem;"></i>
-                                <h5 class="mb-1">{{ $orders->whereIn('status', ['processing', 'shipped'])->count() }}</h5>
+                                <h5 class="mb-1">{{ $orders->whereIn('status', ['pending', 'processing', 'shipped'])->count() }}</h5>
                                 <small>In Progress</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-0 bg-danger text-white">
+                            <div class="card-body text-center">
+                                <i class="zmdi zmdi-close mb-2" style="font-size: 2rem;"></i>
+                                <h5 class="mb-1">{{ $orders->whereIn('status', ['rejected', 'cancelled'])->count() }}</h5>
+                                <small>Rejected/Cancelled</small>
                             </div>
                         </div>
                     </div>
@@ -113,7 +122,13 @@
                                     </td>
                                     <td>
                                         <span class="badge badge-{{ $order->getStatusBadgeClass() }} badge-pill">
-                                            <i class="zmdi zmdi-{{ $order->status === 'delivered' ? 'check-circle' : ($order->status === 'processing' ? 'time' : ($order->status === 'shipped' ? 'local-shipping' : 'close')) }} mr-1"></i>
+                                            <i class="zmdi zmdi-{{
+                                                $order->status === 'delivered' ? 'check-circle' :
+                                                ($order->status === 'processing' ? 'time' :
+                                                ($order->status === 'shipped' ? 'local-shipping' :
+                                                ($order->status === 'approved' ? 'check-circle' :
+                                                ($order->status === 'rejected' ? 'close' : 'close'))))
+                                            }} mr-1"></i>
                                             {{ ucfirst($order->status) }}
                                         </span>
                                     </td>

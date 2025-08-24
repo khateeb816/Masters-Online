@@ -24,7 +24,6 @@ class CreateInventoriesTable extends Migration
             $table->integer('stock_quantity');
             $table->string('status')->default('active');
             $table->string('images')->nullable();
-
             $table->timestamps();
         });
     }

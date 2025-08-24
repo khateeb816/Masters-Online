@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('status');
             $table->string('payment_status');
             $table->string('shipping_address');
+            $table->string('rejection_reason')->nullable();
             $table->string('city');
             $table->string('state');
             $table->string('country');
