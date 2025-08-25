@@ -17,7 +17,7 @@ profile_picture,
 profile_id
 ],
 
-Proflie:[
+Profile:[
 id,
 address_line_1,
 address_line_2,

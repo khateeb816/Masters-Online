@@ -6,6 +6,8 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PromoCodeController;
 use App\Http\Controllers\UserController;
@@ -38,6 +40,25 @@ Route::group(['middleware' => 'auth'], function () {
     // Dashboard Routes
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/export-sales-analytics', [DashboardController::class, 'exportSalesAnalytics'])->name('dashboard.export-sales-analytics');
+    Route::get('/dashboard/export-order-status', [DashboardController::class, 'exportOrderStatus'])->name('dashboard.export-order-status');
+
+    // Notification Routes
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+    Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+    Route::post('/notifications/{id}/mark-read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-read');
+    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
+    Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.delete');
+    Route::get('/notifications/unread-count', [NotificationController::class, 'getUnreadCount'])->name('notifications.unread-count');
+    Route::get('/notifications/recent', [NotificationController::class, 'getRecentNotifications'])->name('notifications.recent');
+
+    // Message Routes
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+    Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
+    Route::post('/messages/{id}/mark-read', [MessageController::class, 'markAsRead'])->name('messages.mark-read');
+    Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('messages.delete');
+    Route::get('/messages/unread-count', [MessageController::class, 'getUnreadCount'])->name('messages.unread-count');
+    Route::get('/messages/recent', [MessageController::class, 'getRecentMessages'])->name('messages.recent');
 
     // User Routes
     Route::get('/users', [UserController::class, 'index'])->name('users');
@@ -91,9 +112,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/promo-codes/{promoCode}', [PromoCodeController::class, 'update'])->name('promo-codes.update');
     Route::get('/promo-codes/{promoCode}/delete', [PromoCodeController::class, 'delete'])->name('promo-codes.delete');
 
-    // Theme Pages Routes
-    Route::get('/icons', [DashboardController::class, 'icons'])->name('icons');
-    Route::get('/forms', [DashboardController::class, 'forms'])->name('forms');
-    Route::get('/tables', [DashboardController::class, 'tables'])->name('tables');
-    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
 });

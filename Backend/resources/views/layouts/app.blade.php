@@ -29,6 +29,40 @@
     <link href="{{ asset('assets/css/app-style.css') }}" rel="stylesheet" />
     <!-- Custom Scrollbar -->
     <link href="{{ asset('assets/css/custom-scrollbar.css') }}" rel="stylesheet" />
+        <style>
+        .badge-counter {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 10px;
+            padding: 3px 6px;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+            color: white !important;
+            background-color: #dc3545 !important;
+            border: 1px solid #dc3545;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .badge-danger {
+            background-color: #dc3545 !important;
+            color: white !important;
+        }
+
+        .badge-warning {
+            background-color: #ffc107 !important;
+            color: #212529 !important;
+        }
+
+        .badge-success {
+            background-color: #28a745 !important;
+            color: white !important;
+        }
+    </style>
     @yield('styles')
 </head>
 
@@ -87,50 +121,30 @@
                     </a>
                 </li>
 
-                <li class="{{ request()->routeIs('icons') ? 'active' : '' }}">
-                    <a href="{{ route('icons') }}">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>UI Icons</span>
+                <li class="sidebar-header">COMMUNICATION</li>
+
+                <li class="{{ request()->routeIs('notifications*') ? 'active' : '' }}">
+                    <a href="{{ route('notifications') }}">
+                        <i class="zmdi zmdi-notifications"></i> <span>Notifications</span>
+                        @php
+                            $unreadNotifications = App\Models\Notification::forUser(auth()->id())->unread()->count();
+                        @endphp
+                        @if($unreadNotifications > 0)
+                            <span class="badge badge-danger" style="position: absolute; top: 5px; right: 10px; font-size: 10px; padding: 2px 6px; border-radius: 10px; min-width: 16px; text-align: center; background-color: #dc3545; color: white;">{{ $unreadNotifications }}</span>
+                        @endif
                     </a>
                 </li>
 
-                <li class="{{ request()->routeIs('forms') ? 'active' : '' }}">
-                    <a href="{{ route('forms') }}">
-                        <i class="zmdi zmdi-format-list-bulleted"></i> <span>Forms</span>
+                <li class="{{ request()->routeIs('messages*') ? 'active' : '' }}">
+                    <a href="{{ route('messages') }}">
+                        <i class="zmdi zmdi-email"></i> <span>Messages</span>
+                        @php
+                            $unreadMessages = App\Models\Message::forUser(auth()->id())->unread()->count();
+                        @endphp
+                        @if($unreadMessages > 0)
+                            <span class="badge badge-danger" style="position: absolute; top: 5px; right: 10px; font-size: 10px; padding: 2px 6px; border-radius: 10px; min-width: 16px; text-align: center; background-color: #dc3545; color: white;">{{ $unreadMessages }}</span>
+                        @endif
                     </a>
-                </li>
-
-                <li class="{{ request()->routeIs('tables') ? 'active' : '' }}">
-                    <a href="{{ route('tables') }}">
-                        <i class="zmdi zmdi-grid"></i> <span>Tables</span>
-                    </a>
-                </li>
-
-
-
-                <li class="{{ request()->routeIs('profile') ? 'active' : '' }}">
-                    <a href="{{ route('profile') }}">
-                        <i class="zmdi zmdi-face"></i> <span>Profile</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('login') }}" target="_blank">
-                        <i class="zmdi zmdi-lock"></i> <span>Login</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('register') }}" target="_blank">
-                        <i class="zmdi zmdi-account-circle"></i> <span>Registration</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-header">LABELS</li>
-                <li><a href="javascript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a>
-                </li>
-                <li><a href="javascript:void();"><i class="zmdi zmdi-chart-donut text-success"></i>
-                        <span>Warning</span></a></li>
-                <li><a href="javascript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a>
                 </li>
             </ul>
         </div>
@@ -145,103 +159,113 @@
                             <i class="icon-menu menu-icon"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <form class="search-bar">
-                            <input type="text" class="form-control" placeholder="Enter keywords">
-                            <a href="javascript:void();"><i class="icon-magnifier"></i></a>
-                        </form>
-                    </li>
                 </ul>
 
                 <ul class="navbar-nav align-items-center right-nav-link">
                     <li class="nav-item dropdown-lg">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
                             href="javascript:void();">
-                            <i class="fa fa-envelope-open-o"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li class="dropdown-item">
-                                <div class="media">
-                                    <div class="avatar"><img class="align-self-start mr-3"
-                                            style="width: 40px; height: 40px; border-radius: 50%;"
-                                            src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-black-png-image_3918427.jpg"
-                                            alt="user avatar"></div>
-                                    <div class="media-body">
-                                        <h6 class="mt-2 user-title">John Doe</h6>
-                                        <p class="user-subtitle">Lorem ipsum dolor sit amet...</p>
-                                        <small class="text-dark">3 hours ago</small>
-                                    </div>
-                                </div>
+                            <i class="fa fa-envelope-open-o"></i>
+                            @php
+                                $unreadMessages = App\Models\Message::forUser(auth()->id())->unread()->count();
+                            @endphp
+                            @if($unreadMessages > 0)
+                                <span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px; font-size: 10px; padding: 3px 6px; border-radius: 10px; min-width: 18px; text-align: center; background-color: #dc3545; color: white;">{{ $unreadMessages }}</span>
+                            @endif
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right" style="width: 320px; max-height: 450px; overflow-y: auto; background-color: #2c3e50; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3); position: fixed; right: 15px; top: 60px;">
+                            @php
+                                $recentMessages = App\Models\Message::forUser(auth()->id())->with('sender')->orderBy('created_at', 'desc')->limit(3)->get();
+                            @endphp
+                            @if($recentMessages->count() > 0)
+                                @foreach($recentMessages as $message)
+                                    <li class="dropdown-item" style="padding: 12px 15px; border-bottom: 1px solid #34495e; background-color: #2c3e50;">
+                                        <div class="media">
+                                            <div class="avatar mr-3">
+                                                <i class="fa fa-user" style="color: #3498db; font-size: 1.2em;"></i>
+                                            </div>
+                                            <div class="media-body" style="min-width: 0;">
+                                                <h6 class="mt-0 mb-1 user-title" style="font-weight: 600; color: white; font-size: 0.9em; word-wrap: break-word;">{{ $message->sender->first_name }} {{ $message->sender->last_name }}</h6>
+                                                <p class="mb-1 user-subtitle" style="color: #ecf0f1; font-size: 0.8em; line-height: 1.3; word-wrap: break-word;">{{ Str::limit($message->subject, 35) }}</p>
+                                                <small style="color: #bdc3c7; font-size: 0.7em;">{{ $message->created_at->format('M j, g:i A') }}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li class="dropdown-item text-center" style="padding: 20px; color: #bdc3c7; background-color: #2c3e50;">
+                                    <i class="fa fa-envelope-o" style="font-size: 1.5em; margin-bottom: 10px; color: #bdc3c7;"></i>
+                                    <p class="mb-0">No messages</p>
+                                </li>
+                            @endif
+                            <li class="dropdown-divider" style="border-color: #34495e;"></li>
+                            <li class="dropdown-item text-center" style="padding: 10px; background-color: #2c3e50;">
+                                <a href="{{ route('messages') }}" class="btn btn-primary btn-sm" style="width: 100%; background-color: #3498db; border: none; padding: 8px 15px; border-radius: 5px; color: white; text-decoration: none; font-weight: 500;">
+                                    <i class="fa fa-eye mr-1"></i>View All Messages
+                                </a>
                             </li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-item">
-                                <div class="media">
-                                    <div class="avatar"><img class="align-self-start mr-3"
-                                            style="width: 40px; height: 40px; border-radius: 50%;"
-                                            src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-black-png-image_3918427.jpg"
-                                            alt="user avatar"></div>
-                                    <div class="media-body">
-                                        <h6 class="mt-2 user-title">Jane Smith</h6>
-                                        <p class="user-subtitle">New project update available...</p>
-                                        <small class="text-dark">5 hours ago</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-item text-center">View All Messages</li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown-lg">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect"
                             data-toggle="dropdown" href="javascript:void();">
-                            <i class="fa fa-bell-o"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li class="dropdown-item">
-                                <div class="media">
-                                    <div class="avatar"><i class="fa fa-user-plus mr-3 text-primary"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="mt-2 user-title">New User Registration</h6>
-                                        <p class="user-subtitle">A new user has registered</p>
-                                        <small class="text-dark">2 hours ago</small>
+                            <i class="fa fa-bell-o"></i>
+                            @php
+                                $pendingOrders = App\Models\Order::where('status', 'pending')->count();
+                                $unreadNotifications = App\Models\Notification::forUser(auth()->id())->unread()->count();
+                                $totalNotifications = $pendingOrders + $unreadNotifications;
+                            @endphp
+                            @if($totalNotifications > 0)
+                                <span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px; font-size: 10px; padding: 3px 6px; border-radius: 10px; min-width: 18px; text-align: center; background-color: #dc3545; color: white;">{{ $totalNotifications }}</span>
+                            @endif
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right" style="width: 320px; max-height: 450px; overflow-y: auto; background-color: #2c3e50; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3); position: fixed; right: 15px; top: 60px;">
+                            @if($pendingOrders > 0)
+                                <li class="dropdown-item" style="background-color: #2c3e50; border-bottom: 1px solid #34495e;">
+                                    <div class="media">
+                                        <div class="avatar mr-3">
+                                            <i class="fa fa-clock-o" style="color: #ffc107; font-size: 1.2em;"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <h6 class="mt-0 mb-1 user-title" style="font-weight: 600; color: white; font-size: 0.95em;">Pending Orders</h6>
+                                            <p class="mb-1 user-subtitle" style="color: #ecf0f1; font-size: 0.9em;">{{ $pendingOrders }} orders awaiting approval</p>
+                                            <small style="color: #bdc3c7; font-size: 0.8em;">Action required</small>
+                                        </div>
                                     </div>
-                                </div>
+                                </li>
+                            @endif
+                            @php
+                                $recentNotifications = App\Models\Notification::forUser(auth()->id())->orderBy('created_at', 'desc')->limit(3)->get();
+                            @endphp
+                            @if($recentNotifications->count() > 0)
+                                @foreach($recentNotifications as $notification)
+                                    <li class="dropdown-item" style="padding: 12px 15px; border-bottom: 1px solid #34495e; background-color: #2c3e50;">
+                                        <div class="media">
+                                            <div class="avatar mr-3">
+                                                <i class="{{ $notification->getIconClass() }}" style="color: {{ $notification->type == 'error' ? '#e74c3c' : ($notification->type == 'warning' ? '#f39c12' : ($notification->type == 'success' ? '#27ae60' : '#3498db')) }}; font-size: 1.2em;"></i>
+                                            </div>
+                                            <div class="media-body" style="min-width: 0;">
+                                                <h6 class="mt-0 mb-1 user-title" style="font-weight: 600; color: white; font-size: 0.9em; word-wrap: break-word;">{{ $notification->title }}</h6>
+                                                <small style="color: #bdc3c7; font-size: 0.7em;">{{ $notification->created_at->format('M j, g:i A') }}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li class="dropdown-item text-center" style="padding: 20px; color: #bdc3c7; background-color: #2c3e50;">
+                                    <i class="fa fa-bell-slash" style="font-size: 1.5em; margin-bottom: 10px; color: #bdc3c7;"></i>
+                                    <p class="mb-0">No notifications</p>
+                                </li>
+                            @endif
+                            <li class="dropdown-divider" style="border-color: #34495e;"></li>
+                            <li class="dropdown-item text-center" style="padding: 10px; background-color: #2c3e50;">
+                                <a href="{{ route('notifications') }}" class="btn btn-primary btn-sm" style="width: 100%; background-color: #3498db; border: none; padding: 8px 15px; border-radius: 5px; color: white; text-decoration: none; font-weight: 500;">
+                                    <i class="fa fa-eye mr-1"></i>View All Notifications
+                                </a>
                             </li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-item">
-                                <div class="media">
-                                    <div class="avatar"><i class="fa fa-download mr-3 text-success"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="mt-2 user-title">Download Complete</h6>
-                                        <p class="user-subtitle">Your file has been downloaded</p>
-                                        <small class="text-dark">1 hour ago</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-item">
-                                <div class="media">
-                                    <div class="avatar"><i class="fa fa-exclamation-triangle mr-3 text-warning"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <h6 class="mt-2 user-title">System Alert</h6>
-                                        <p class="user-subtitle">Server maintenance scheduled</p>
-                                        <small class="text-dark">30 minutes ago</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-item text-center">View All Notifications</li>
                         </ul>
                     </li>
-                    <li class="nav-item language">
-                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect"
-                            data-toggle="dropdown" href="javascript:void();"><i class="fa fa-flag"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
-                        </ul>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown"
                             href="#">

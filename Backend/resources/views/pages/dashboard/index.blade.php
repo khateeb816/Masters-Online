@@ -50,7 +50,7 @@
 <div class="row">
     <div class="col-12 col-lg-8 col-xl-8">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0"><i class="zmdi zmdi-chart mr-2"></i>Sales Analytics</h5>
                 <div class="card-action">
                     <div class="dropdown">
@@ -61,13 +61,13 @@
                             <a class="dropdown-item" href="{{ route('orders') }}">View All Orders</a>
                             <a class="dropdown-item" href="{{ route('inventories') }}">View Products</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:void();">Export Data</a>
+                            <a class="dropdown-item" href="{{ route('dashboard.export-sales-analytics') }}">Export Data</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <div class="chart-container-1">
+                <div class="chart-container-1" style="height: 200px;">
                     <canvas id="chart1"></canvas>
                 </div>
             </div>
@@ -97,7 +97,7 @@
 
     <div class="col-12 col-lg-4 col-xl-4">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0"><i class="zmdi zmdi-pie-chart mr-2"></i>Order Status</h5>
                 <div class="card-action">
                     <div class="dropdown">
@@ -107,57 +107,32 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{{ route('orders') }}">View All Orders</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:void();">Export Report</a>
+                            <a class="dropdown-item" href="{{ route('dashboard.export-order-status') }}">Export Report</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <div class="chart-container-2">
+                <div class="chart-container-2" style="height: 200px;">
                     <canvas id="chart2" class="w-100"></canvas>
                 </div>
             </div>
-                            <div class="table-responsive">
-                    <table class="table align-items-center table-sm">
-                        <tbody>
-                            <tr>
-                                <td><i class="zmdi zmdi-circle text-warning mr-2"></i> Pending</td>
-                                <td>{{ $pendingOrders ?? 0 }}</td>
-                                <td>{{ $pendingPercentage ?? 0 }}%</td>
-                            </tr>
-                            <tr>
-                                <td><i class="zmdi zmdi-circle text-info mr-2"></i> Processing</td>
-                                <td>{{ $processingOrders ?? 0 }}</td>
-                                <td>{{ $processingPercentage ?? 0 }}%</td>
-                            </tr>
-                            <tr>
-                                <td><i class="zmdi zmdi-circle text-success mr-2"></i> Approved</td>
-                                <td>{{ $approvedOrders ?? 0 }}</td>
-                                <td>{{ $approvedPercentage ?? 0 }}%</td>
-                            </tr>
-                            <tr>
-                                <td><i class="zmdi zmdi-circle text-primary mr-2"></i> Shipped</td>
-                                <td>{{ $shippedOrders ?? 0 }}</td>
-                                <td>{{ $shippedPercentage ?? 0 }}%</td>
-                            </tr>
-                            <tr>
-                                <td><i class="zmdi zmdi-circle text-success mr-2"></i> Delivered</td>
-                                <td>{{ $deliveredOrders ?? 0 }}</td>
-                                <td>{{ $deliveredPercentage ?? 0 }}%</td>
-                            </tr>
-                            <tr>
-                                <td><i class="zmdi zmdi-circle text-danger mr-2"></i> Rejected</td>
-                                <td>{{ $rejectedOrders ?? 0 }}</td>
-                                <td>{{ $rejectedPercentage ?? 0 }}%</td>
-                            </tr>
-                            <tr>
-                                <td><i class="zmdi zmdi-circle text-danger mr-2"></i> Cancelled</td>
-                                <td>{{ $cancelledOrders ?? 0 }}</td>
-                                <td>{{ $cancelledPercentage ?? 0 }}%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-responsive">
+                <table class="table align-items-center table-sm">
+                    <tbody>
+                        <tr>
+                            <td><i class="zmdi zmdi-circle text-warning mr-2"></i> Pending</td>
+                            <td>{{ $pendingOrders ?? 0 }}</td>
+                            <td>{{ $pendingPercentage ?? 0 }}%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="zmdi zmdi-circle text-info mr-2"></i> Processing</td>
+                            <td>{{ $processingOrders ?? 0 }}</td>
+                            <td>{{ $processingPercentage ?? 0 }}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -165,7 +140,7 @@
 <div class="row">
     <div class="col-12 col-lg-6">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0"><i class="zmdi zmdi-star mr-2"></i>Top Products</h5>
                 <div class="card-action">
                     <a href="{{ route('inventories') }}" class="btn btn-primary btn-sm">View All</a>
@@ -212,7 +187,7 @@
 
     <div class="col-12 col-lg-6">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0"><i class="zmdi zmdi-time mr-2"></i>Recent Orders</h5>
                 <div class="card-action">
                     <a href="{{ route('orders') }}" class="btn btn-primary btn-sm">View All</a>
@@ -303,7 +278,7 @@
 
 @section('scripts')
 <!-- Chart js -->
-<script src="{{ asset('backendAssets/plugins/Chart.js/Chart.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/Chart.js/Chart.min.js') }}"></script>
 <script>
     $(function() {
         "use strict";
