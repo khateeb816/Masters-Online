@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Inventory;
+use App\Models\Notification;
 use App\Models\PromoCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -141,6 +142,15 @@ class DashboardController extends Controller
 
         $pdf = PDF::loadView('pages.dashboard.sales-analytics-pdf', $data);
 
+        Notification::create([
+            'user_id' => auth()->user()->id,
+            'title' => 'Sales Analytics Report',
+            'message' => 'Sales analytics report has been generated.',
+            'type' => 'success',
+            'icon' => 'fa-file-pdf',
+            'data' => json_encode($data)
+        ]);
+
         return $pdf->download('sales-analytics-report-' . now()->format('Y-m-d') . '.pdf');
     }
 
@@ -196,6 +206,16 @@ class DashboardController extends Controller
             'ordersByStatus' => $ordersByStatus,
             'generatedAt' => now()->format('F j, Y \a\t g:i A')
         ];
+
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Order Status Report',
+            'message' => 'Order status report has been generated.',
+            'type' => 'success',
+            'icon' => 'fa-file-pdf',
+            'data' => json_encode($data)
+        ]);
 
         $pdf = PDF::loadView('pages.dashboard.order-status-pdf', $data);
 

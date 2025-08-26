@@ -9,6 +9,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromoCodeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -56,9 +57,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/messages', [MessageController::class, 'index'])->name('messages');
     Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
     Route::post('/messages/{id}/mark-read', [MessageController::class, 'markAsRead'])->name('messages.mark-read');
+    Route::post('/messages/mark-all-read', [MessageController::class, 'markAllAsRead'])->name('messages.mark-all-read');
     Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('messages.delete');
     Route::get('/messages/unread-count', [MessageController::class, 'getUnreadCount'])->name('messages.unread-count');
     Route::get('/messages/recent', [MessageController::class, 'getRecentMessages'])->name('messages.recent');
+
+    // Profile Routes
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
 
     // User Routes
     Route::get('/users', [UserController::class, 'index'])->name('users');
@@ -111,5 +118,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/promo-codes/{promoCode}/edit', [PromoCodeController::class, 'edit'])->name('promo-codes.edit');
     Route::put('/promo-codes/{promoCode}', [PromoCodeController::class, 'update'])->name('promo-codes.update');
     Route::get('/promo-codes/{promoCode}/delete', [PromoCodeController::class, 'delete'])->name('promo-codes.delete');
-
 });

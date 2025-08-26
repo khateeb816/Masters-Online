@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -68,6 +69,15 @@ class UserController extends Controller
             $imageName = 'user_' . time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads'), $imageName);
         }
+
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'User Created',
+            'message' => 'User ' . $user->first_name . ' ' . $user->last_name . ' created successfully',
+            'type' => 'success',
+            'icon' => 'fa-user-plus',
+        ]);
 
         return redirect()->route('users')->with('success', 'User created successfully');
     }
@@ -197,15 +207,41 @@ class UserController extends Controller
             $user->profile->update($profileData);
         }
 
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'User Updated',
+            'message' => 'User ' . $user->first_name . ' ' . $user->last_name . ' updated successfully',
+            'type' => 'success',
+            'icon' => 'fa-user-edit',
+        ]);
+
         return redirect()->route('users')->with('success', 'User updated successfully');
     }
     public function delete($id)
     {
         $user = User::with('profile')->find($id);
+        $admin = auth()->user();
+
+        // Store user info before deletion for notification
+        $deletedUserName = $user->first_name . ' ' . $user->last_name;
+        $deletedUserEmail = $user->email;
+
         if ($user->profile_picture) {
             unlink(public_path('uploads/' . $user->profile_picture));
         }
+
         $user->delete();
+
+        // Send notification to admin about the deletion
+        Notification::create([
+            'user_id' => $admin->id,
+            'title' => 'User Deleted',
+            'message' => "User '{$deletedUserName}' ({$deletedUserEmail}) has been deleted successfully",
+            'type' => 'success',
+            'icon' => 'fa-user-times',
+        ]);
+
         return redirect()->route('users')->with('success', 'User deleted successfully');
     }
 }

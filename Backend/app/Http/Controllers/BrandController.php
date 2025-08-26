@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -42,6 +43,15 @@ class BrandController extends Controller
             'image' => $imageName ?? null,
         ]);
 
+
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Brand Created',
+            'message' => 'Brand ' . $brand->name . ' created successfully',
+            'type' => 'success',
+            'icon' => 'fa-plus-circle',
+        ]);
 
         return redirect()->route('brands')->with('success', 'Brand created successfully');
     }
@@ -107,6 +117,15 @@ class BrandController extends Controller
 
 
 
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Brand Updated',
+            'message' => 'Brand ' . $brand->name . ' updated successfully',
+            'type' => 'success',
+            'icon' => 'fa-edit',
+        ]);
+
         return redirect()->route('brands')->with('success', 'Brand updated successfully');
     }
     public function delete($id)
@@ -116,6 +135,16 @@ class BrandController extends Controller
             unlink(public_path('uploads/' . $brand->image));
         }
         $brand->delete();
+
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Brand Deleted',
+            'message' => 'Brand ' . $brand->name . ' deleted successfully',
+            'type' => 'success',
+            'icon' => 'fa-trash',
+        ]);
+
         return redirect()->route('brands')->with('success', 'Brand deleted successfully');
     }
 }

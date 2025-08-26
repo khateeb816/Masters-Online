@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Inventory;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -55,6 +56,15 @@ class InventoryController extends Controller
             'stock_quantity' => $request->stock_quantity,
             'status' => $request->status,
             'images' => !empty($images) ? json_encode($images) : null,
+        ]);
+
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Inventory Created',
+            'message' => 'Inventory ' . $inventory->name . ' created successfully',
+            'type' => 'success',
+            'icon' => 'fa-plus-circle',
         ]);
 
         return redirect()->route('inventories')->with('success', 'Inventory created successfully');
@@ -117,6 +127,15 @@ class InventoryController extends Controller
             'images' => !empty($images) ? json_encode($images) : null,
         ]);
 
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Inventory Updated',
+            'message' => 'Inventory ' . $inventory->name . ' updated successfully',
+            'type' => 'success',
+            'icon' => 'fa-edit',
+        ]);
+
         return redirect()->route('inventories')->with('success', 'Inventory updated successfully');
     }
     public function delete($id)
@@ -131,6 +150,16 @@ class InventoryController extends Controller
             }
         }
         $inventory->delete();
+
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Inventory Deleted',
+            'message' => 'Inventory ' . $inventory->name . ' deleted successfully',
+            'type' => 'success',
+            'icon' => 'fa-trash',
+        ]);
+
         return redirect()->route('inventories')->with('success', 'Inventory deleted successfully');
     }
 }

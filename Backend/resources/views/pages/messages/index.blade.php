@@ -8,6 +8,14 @@
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0"><i class="zmdi zmdi-email mr-2"></i>Messages</h5>
+                @if($inbox->where('is_read', false)->count() > 0)
+                    <form action="{{ route('messages.mark-all-read') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-success btn-sm">
+                            <i class="zmdi zmdi-check-all mr-1"></i>Mark All as Read
+                        </button>
+                    </form>
+                @endif
             </div>
             <div class="card-body">
                 <!-- Navigation Tabs -->
@@ -65,7 +73,7 @@
                                                 <strong>{{ $message->subject }}</strong>
                                             </td>
                                             <td>
-                                                {{ Str::limit($message->message, 100) }}
+                                                {{ Str::limit($message->message, 20) }}
                                             </td>
                                             <td>
                                                 {{ $message->created_at->format('M j, Y g:i A') }}

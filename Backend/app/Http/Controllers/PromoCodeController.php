@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PromoCode;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -39,6 +40,15 @@ class PromoCodeController extends Controller
             'status' => $request->status,
         ]);
 
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Promo Code Created',
+            'message' => 'Promo code ' . $request->code . ' created successfully',
+            'type' => 'success',
+            'icon' => 'fa-plus-circle',
+        ]);
+
         return redirect()->route('promo-codes')->with('success', 'Promo code created successfully');
     }
 
@@ -73,6 +83,15 @@ class PromoCodeController extends Controller
             'status' => $request->status,
         ]);
 
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Promo Code Updated',
+            'message' => 'Promo code ' . $promoCode->code . ' updated successfully',
+            'type' => 'success',
+            'icon' => 'fa-edit',
+        ]);
+
         return redirect()->route('promo-codes')->with('success', 'Promo code updated successfully');
     }
 
@@ -85,6 +104,16 @@ class PromoCodeController extends Controller
         }
 
         $promoCode->delete();
+
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Promo Code Deleted',
+            'message' => 'Promo code ' . $promoCode->code . ' deleted successfully',
+            'type' => 'success',
+            'icon' => 'fa-trash',
+        ]);
+
         return redirect()->route('promo-codes')->with('success', 'Promo code deleted successfully');
     }
 }

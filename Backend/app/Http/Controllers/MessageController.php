@@ -53,6 +53,13 @@ class MessageController extends Controller
         return redirect()->back()->with('success', 'Message marked as read');
     }
 
+    public function markAllAsRead()
+    {
+        Message::forUser(Auth::id())->unread()->update(['is_read' => true]);
+
+        return redirect()->back()->with('success', 'All messages marked as read');
+    }
+
     public function destroy($id)
     {
         $message = Message::where(function($query) {

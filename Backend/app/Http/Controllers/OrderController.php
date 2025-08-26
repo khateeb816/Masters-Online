@@ -7,6 +7,7 @@ use App\Models\OrderDetail;
 use App\Models\User;
 use App\Models\Inventory;
 use App\Models\PromoCode;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -31,6 +32,14 @@ class OrderController extends Controller
     {
         try {
             $order->update(['status' => 'approved']);
+            Notification::create([
+
+                'user_id' => auth()->user()->id,
+                'title' => 'Order Approved',
+                'message' => 'Order ' . $order->id . ' approved successfully',
+                'type' => 'success',
+                'icon' => 'fa-check',
+            ]);
             return redirect()->back()->with('success', 'Order approved successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to approve order: ' . $e->getMessage());
@@ -76,6 +85,15 @@ class OrderController extends Controller
             Log::info('Order rejected successfully', [
                 'order_id' => $order->id,
                 'new_status' => $order->status
+            ]);
+
+            Notification::create([
+
+                'user_id' => auth()->user()->id,
+                'title' => 'Order Rejected',
+                'message' => 'Order ' . $order->id . ' rejected successfully with reason: ' . $request->rejection_reason,
+                'type' => 'success',
+                'icon' => 'fa-times',
             ]);
 
             return redirect()->back()->with('success', 'Order rejected successfully with reason: ' . $request->rejection_reason);

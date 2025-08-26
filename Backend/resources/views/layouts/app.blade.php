@@ -270,7 +270,7 @@
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown"
                             href="#">
                             <span class="user-profile"><img
-                                    src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-black-png-image_3918427.jpg"
+                                    src="{{ auth()->user()->profile_picture ? asset('uploads/' . auth()->user()->profile_picture) : asset('assets/images/profile.jpg') }}"
                                     class="img-circle" alt="user avatar"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
@@ -278,24 +278,30 @@
                                 <a href="javaScript:void();">
                                     <div class="media">
                                         <div class="avatar"><img class="align-self-start mr-3"
-                                                src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-black-png-image_3918427.jpg"
+                                                src="{{ auth()->user()->profile_picture ? asset('uploads/' . auth()->user()->profile_picture) : asset('assets/images/profile.jpg') }}"
                                                 alt="user avatar"></div>
                                         <div class="media-body">
-                                            <h6 class="mt-2 user-title">{{ auth()->user()->name ?? 'Guest User' }}
+                                            <h6 class="mt-2 user-title">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
                                             </h6>
                                             <p class="user-subtitle">
-                                                {{ auth()->user()->email ?? 'guest@example.com' }}
+                                                {{ auth()->user()->email }}
                                             </p>
                                         </div>
                                     </div>
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
-                            <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
+                            <li class="dropdown-item">
+                                <a href="{{ route('messages') }}" style="color: inherit; text-decoration: none;">
+                                    <i class="icon-envelope mr-2"></i> Inbox
+                                </a>
+                            </li>
                             <li class="dropdown-divider"></li>
-                            <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
+                            <li class="dropdown-item">
+                                <a href="{{ route('profile') }}" style="color: inherit; text-decoration: none;">
+                                    <i class="icon-settings mr-2"></i> Settings
+                                </a>
+                            </li>
                             <li class="dropdown-divider"></li>
                             <li class="dropdown-item">
                                 <a href="{{ route('logout') }}"

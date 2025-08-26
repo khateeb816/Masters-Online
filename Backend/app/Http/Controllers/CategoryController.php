@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -43,6 +44,15 @@ class CategoryController extends Controller
             'image' => $imageName ?? null,
         ]);
 
+
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Category Created',
+            'message' => 'Category ' . $category->title . ' created successfully',
+            'type' => 'success',
+            'icon' => 'fa-plus-circle',
+        ]);
 
         return redirect()->route('categories')->with('success', 'Category created successfully');
     }
@@ -108,6 +118,15 @@ class CategoryController extends Controller
 
 
 
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Category Updated',
+            'message' => 'Category ' . $category->title . ' updated successfully',
+            'type' => 'success',
+            'icon' => 'fa-edit',
+        ]);
+
         return redirect()->route('categories')->with('success', 'Category updated successfully');
     }
     public function delete($id)
@@ -117,6 +136,16 @@ class CategoryController extends Controller
             unlink(public_path('uploads/' . $category->image));
         }
         $category->delete();
+
+        Notification::create([
+
+            'user_id' => auth()->user()->id,
+            'title' => 'Category Deleted',
+            'message' => 'Category ' . $category->title . ' deleted successfully',
+            'type' => 'success',
+            'icon' => 'fa-trash',
+        ]);
+
         return redirect()->route('categories')->with('success', 'Category deleted successfully');
     }
 }
