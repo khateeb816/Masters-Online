@@ -67,7 +67,7 @@ class InventoryController extends Controller
             'icon' => 'fa-plus-circle',
         ]);
 
-        return redirect()->route('inventories')->with('success', 'Inventory created successfully');
+        return redirect()->route('inventories')->with('success', 'Inventory ' . $inventory->name . ' created successfully');
     }
     public function show($id)
     {
@@ -136,7 +136,7 @@ class InventoryController extends Controller
             'icon' => 'fa-edit',
         ]);
 
-        return redirect()->route('inventories')->with('success', 'Inventory updated successfully');
+        return redirect()->route('inventories')->with('success', 'Inventory ' . $inventory->name . ' updated successfully');
     }
     public function delete($id)
     {
@@ -160,6 +160,6 @@ class InventoryController extends Controller
             'icon' => 'fa-trash',
         ]);
 
-        return redirect()->route('inventories')->with('success', 'Inventory deleted successfully');
+        return redirect()->route('inventories')->with('success', 'Inventory ' . $inventory->name . ' deleted successfully');
     }
 }

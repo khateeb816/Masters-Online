@@ -373,6 +373,13 @@
                                         </tr>
                                         @if ($order->promoCode)
                                             <tr>
+                                                <td><strong>Promo Code:</strong></td>
+                                                <td class="text-right">
+                                                    <span class="badge badge-info">{{ $order->promoCode->code }}</span>
+                                                    <br><small class="text-muted">{{ $order->promoCode->discount_percentage }}% off</small>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td><strong>Discount:</strong></td>
                                                 <td class="text-right text-success">
                                                     -${{ number_format((($order->promoCode->discount_percentage / 100) * $order->sub_total) / 100, 2) }}
@@ -387,7 +394,7 @@
                                         <tr class="border-top">
                                             <td><strong>Total:</strong></td>
                                             <td class="text-right"><strong
-                                                    class="text-dark">${{ number_format($order->total / 100, 2) }}</strong>
+                                                    class="text-primary">${{ number_format($order->total / 100, 2) }}</strong>
                                             </td>
                                         </tr>
                                     </table>

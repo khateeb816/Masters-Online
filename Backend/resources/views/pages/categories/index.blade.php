@@ -51,10 +51,19 @@
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-body text-center">
                             <div class="mb-3">
-                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto"
-                                     style="width: 60px; height: 60px;">
-                                    <i class="zmdi zmdi-folder text-white" style="font-size: 1.5rem;"></i>
-                                </div>
+                                @if($category->image)
+                                    <div class="mx-auto" style="width: 60px; height: 60px;">
+                                        <img src="{{ asset('uploads/' . $category->image) }}"
+                                             alt="{{ $category->title }}"
+                                             class="img-fluid rounded-circle"
+                                             style="width: 60px; height: 60px; object-fit: cover; border: 2px solid #007bff;">
+                                    </div>
+                                @else
+                                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                                         style="width: 60px; height: 60px;">
+                                        <i class="zmdi zmdi-folder text-white" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                @endif
                             </div>
                             <h5 class="card-title mb-2">{{ $category->title }}</h5>
                             <div class="mb-3">

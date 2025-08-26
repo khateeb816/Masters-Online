@@ -54,7 +54,7 @@ class CategoryController extends Controller
             'icon' => 'fa-plus-circle',
         ]);
 
-        return redirect()->route('categories')->with('success', 'Category created successfully');
+        return redirect()->route('categories')->with('success', 'Category ' . $category->title . ' created successfully');
     }
     public function show($id)
     {
@@ -127,7 +127,7 @@ class CategoryController extends Controller
             'icon' => 'fa-edit',
         ]);
 
-        return redirect()->route('categories')->with('success', 'Category updated successfully');
+        return redirect()->route('categories')->with('success', 'Category ' . $category->title . ' updated successfully');
     }
     public function delete($id)
     {
@@ -146,6 +146,6 @@ class CategoryController extends Controller
             'icon' => 'fa-trash',
         ]);
 
-        return redirect()->route('categories')->with('success', 'Category deleted successfully');
+        return redirect()->route('categories')->with('success', 'Category ' . $category->title . ' deleted successfully');
     }
 }

@@ -79,7 +79,7 @@ class UserController extends Controller
             'icon' => 'fa-user-plus',
         ]);
 
-        return redirect()->route('users')->with('success', 'User created successfully');
+        return redirect()->route('users')->with('success', 'User ' . $user->first_name . ' ' . $user->last_name . ' created successfully');
     }
     public function show($id)
     {
@@ -216,7 +216,7 @@ class UserController extends Controller
             'icon' => 'fa-user-edit',
         ]);
 
-        return redirect()->route('users')->with('success', 'User updated successfully');
+        return redirect()->route('users')->with('success', 'User ' . $user->first_name . ' ' . $user->last_name . ' updated successfully');
     }
     public function delete($id)
     {
@@ -242,6 +242,6 @@ class UserController extends Controller
             'icon' => 'fa-user-times',
         ]);
 
-        return redirect()->route('users')->with('success', 'User deleted successfully');
+        return redirect()->route('users')->with('success', 'User ' . $deletedUserName . ' deleted successfully');
     }
 }

@@ -41,7 +41,7 @@
                 @if($user->profile_picture)
                 <div class="form-group">
                     <label for="input-6">Profile Picture</label>
-                    <img src="{{ asset('uploads/' . $user->profile_picture) }}" alt="Profile Picture" class="img-fluid">
+                    <img src="{{ asset('uploads/' . $user->profile_picture) }}" alt="Profile Picture" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
                 </div>
                 @endif
                 <div class="form-group">

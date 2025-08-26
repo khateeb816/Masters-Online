@@ -53,7 +53,7 @@ class BrandController extends Controller
             'icon' => 'fa-plus-circle',
         ]);
 
-        return redirect()->route('brands')->with('success', 'Brand created successfully');
+        return redirect()->route('brands')->with('success', 'Brand ' . $brand->name . ' created successfully');
     }
     public function show($id)
     {
@@ -126,7 +126,7 @@ class BrandController extends Controller
             'icon' => 'fa-edit',
         ]);
 
-        return redirect()->route('brands')->with('success', 'Brand updated successfully');
+        return redirect()->route('brands')->with('success', 'Brand ' . $brand->name . ' updated successfully');
     }
     public function delete($id)
     {
@@ -145,6 +145,6 @@ class BrandController extends Controller
             'icon' => 'fa-trash',
         ]);
 
-        return redirect()->route('brands')->with('success', 'Brand deleted successfully');
+        return redirect()->route('brands')->with('success', 'Brand ' . $brand->name . ' deleted successfully');
     }
 }

@@ -36,11 +36,11 @@ class OrderController extends Controller
 
                 'user_id' => auth()->user()->id,
                 'title' => 'Order Approved',
-                'message' => 'Order ' . $order->id . ' approved successfully',
+                'message' => 'Order ' . $order->number . ' approved successfully',
                 'type' => 'success',
                 'icon' => 'fa-check',
             ]);
-            return redirect()->back()->with('success', 'Order approved successfully!');
+            return redirect()->back()->with('success', 'Order ' . $order->number . ' approved successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to approve order: ' . $e->getMessage());
         }
@@ -91,12 +91,12 @@ class OrderController extends Controller
 
                 'user_id' => auth()->user()->id,
                 'title' => 'Order Rejected',
-                'message' => 'Order ' . $order->id . ' rejected successfully with reason: ' . $request->rejection_reason,
+                'message' => 'Order ' . $order->number . ' rejected successfully with reason: ' . $request->rejection_reason,
                 'type' => 'success',
                 'icon' => 'fa-times',
             ]);
 
-            return redirect()->back()->with('success', 'Order rejected successfully with reason: ' . $request->rejection_reason);
+            return redirect()->back()->with('success', 'Order ' . $order->number . ' rejected successfully with reason: ' . $request->rejection_reason);
         } catch (\Exception $e) {
             Log::error('Order rejection failed', [
                 'order_id' => $order->id,

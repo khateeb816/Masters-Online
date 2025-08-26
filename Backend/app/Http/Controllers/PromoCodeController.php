@@ -49,7 +49,7 @@ class PromoCodeController extends Controller
             'icon' => 'fa-plus-circle',
         ]);
 
-        return redirect()->route('promo-codes')->with('success', 'Promo code created successfully');
+        return redirect()->route('promo-codes')->with('success', 'Promo code ' . $request->code . ' created successfully');
     }
 
     public function show(PromoCode $promoCode)
@@ -92,7 +92,7 @@ class PromoCodeController extends Controller
             'icon' => 'fa-edit',
         ]);
 
-        return redirect()->route('promo-codes')->with('success', 'Promo code updated successfully');
+        return redirect()->route('promo-codes')->with('success', 'Promo code ' . $promoCode->code . ' updated successfully');
     }
 
     public function delete(PromoCode $promoCode)
@@ -114,6 +114,6 @@ class PromoCodeController extends Controller
             'icon' => 'fa-trash',
         ]);
 
-        return redirect()->route('promo-codes')->with('success', 'Promo code deleted successfully');
+        return redirect()->route('promo-codes')->with('success', 'Promo code ' . $promoCode->code . ' deleted successfully');
     }
 }

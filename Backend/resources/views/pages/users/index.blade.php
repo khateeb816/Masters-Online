@@ -58,7 +58,7 @@
                 <table class="table table-hover" id="table">
                     <thead class="thead-light">
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">S.No</th>
                             <th scope="col">User</th>
                             <th scope="col">Contact</th>
                             <th scope="col">Role</th>
@@ -70,7 +70,7 @@
                     <tbody>
                         @foreach ($users as $user)
                         <tr>
-                            <td>{{ $user->id }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div class="mr-3">
